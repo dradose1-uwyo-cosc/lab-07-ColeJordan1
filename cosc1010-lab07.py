@@ -125,7 +125,7 @@ def divide(num1, num2):
 def multiply(num1,num2):
     return num1*num2
 
-def remainder(num1,num2):
+def mod(num1,num2):
     return num1%num2
 
 while True:
@@ -141,6 +141,8 @@ while True:
         if not i.isdigit():
             if i == '+' or i == '-' or i =='*' or i == '/' or i == '%':
                 operator = i
+            elif i == ' ':
+                calculatorInput.replace(' ', '')
             else:
                 print("Not a Proper Input, Try Again")
                 statusChecker = True
@@ -164,6 +166,6 @@ while True:
     elif operator == '/':
         result = divide(numList[0],numList[1])
     elif operator == '%':
-        result = remainder(numList[0],numList[1])
+        result = mod(numList[0],numList[1])
 
     print(f"The Result of your Calculator Operation is {result}")
