@@ -1,12 +1,9 @@
-# Your Name Here
+# Cole Jordan
 # UWYO COSC 1010
-# Submission Date
-# Lab XX
-# Lab Section: 
-# Sources, people worked with, help given to: 
-# your
-# comments
-# here
+# 10/31/24
+# Lab 7
+# Lab Section: 12 
+# Sources, people worked with, help given to: Peter Martinez
 
 
 # Prompt the user for an upper bound 
@@ -17,7 +14,14 @@
     # If a user did not enter a number output a statement saying so
 # You will continue to prompt the user until a proper integer value is entered
 
+factorialBound = str(input("Enter Upper Bound: !"))
 factorial = 1
+
+while not factorialBound.isdigit():
+    factorialBound = str(input("Input Error, Enter a Real Number: !"))
+
+for i in range(1,int(factorialBound) + 1):
+    factorial = factorial * i
 
 print(f"The result of the factorial based on the given bound is {factorial}")
 
@@ -37,9 +41,59 @@ print("*"*75)
 # All this together means you will have an intensive while loop that includes multiple if statements, likely with some nesting 
 # The sum should start at 0 
 
-num_sum = 0 
+def isNegative(input):
+    if input.startswith('-'):
+        return True
+    else:
+        return False
 
-print(f"Your final sum is {num_sum}")
+def isNum(input):
+    if input.isdigit():
+        return True
+    else:
+        return False
+
+def numChecker(input):
+    number = input
+    if isNegative(input):
+        number = number.replace('-','')
+        return isNum(number)    
+    else:
+        return isNum(number)
+
+
+    
+sum = 0
+
+while True:
+    currentNumber = str(input(f"Current Sum: {sum}, Input Number Here, Type 'exit' to Exit: "))
+
+    # Exit Checker
+
+    if currentNumber.lower() == 'exit':
+        break
+
+    # Checks if number, loops prompting for a proper input if not, while accounting for negative
+
+    elif not numChecker(currentNumber):
+        print('Not a number, try again!')
+        continue
+
+    
+
+    if currentNumber.startswith('-'):
+        sum = sum - int(currentNumber.replace('-', ''))
+    else:
+        sum += int(currentNumber)
+    
+    
+
+
+
+
+
+
+print(f"Your final sum is {sum}")
 
 print("*"*75)
 # Now you will be creating a two operand calculator
@@ -57,6 +111,59 @@ print("*"*75)
 # Your program will need to work with whatever spacing is given  
     # So, it should function the same for `5 + 6` as `5+6`
 # Print the result of the equation
-# Again, loop through prompting the user for input until `exit` in any casing is input 
+# Again, loop through prompting the user for input until `exit` in any casing is input
 
-        
+def add(num1, num2):
+    return num1+num2
+
+def subtract(num1, num2):
+    return num1-num2
+
+def divide(num1, num2):
+    return num1/num2
+
+def multiply(num1,num2):
+    return num1*num2
+
+def remainder(num1,num2):
+    return num1%num2
+
+while True:
+    calculatorInput = str(input("Type 'exit' to Exit. Enter Full Calculator Operation Here: "))
+
+    if calculatorInput.lower() == 'exit':
+        break
+
+    operator = ''
+    statusChecker = False
+
+    for i in calculatorInput:
+        if not i.isdigit():
+            if i == '+' or i == '-' or i =='*' or i == '/' or i == '%':
+                operator = i
+            else:
+                print("Not a Proper Input, Try Again")
+                statusChecker = True
+
+    if statusChecker:
+        continue
+
+    numList = calculatorInput.split(operator)
+
+    numList[0] = int(numList[0])
+    numList[1] = int(numList[1])
+
+    result = 0
+
+    if operator == '+':
+        result = add(numList[0],numList[1])
+    elif operator == '-':
+        result = subtract(numList[0],numList[1])
+    elif operator == '*':
+        result = multiply(numList[0],numList[1])
+    elif operator == '/':
+        result = divide(numList[0],numList[1])
+    elif operator == '%':
+        result = remainder(numList[0],numList[1])
+
+    print(f"The Result of your Calculator Operation is {result}")
